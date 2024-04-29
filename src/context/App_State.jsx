@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { AppContext } from "./App_Context";
 import axios from "axios";
+const baseurl = "https://react-reacipe-website.onrender.com"
 
 const App_State = (props) => {
-  const url = "http://localhost:3000/api";
+  // const url = "http://localhost:3000/api";
   const [token, setToken] = useState("");
   const [recipe, setrecipe] = useState([]);
   const [savedRecipe, setsavedRecipe] = useState([]);
@@ -16,7 +17,7 @@ const App_State = (props) => {
 
   useEffect(() => {
     const fetchRecipe = async () => {
-      const api = await axios.get(`${url}/`, {
+      const api = await axios.get(`${baseurl}/api`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -48,7 +49,7 @@ const App_State = (props) => {
   // register
   const register = async (name, gmail, password) => {
     const api = await axios.post(
-      `${url}/register`,
+      `${baseurl}/api/register`,
       { name, gmail, password },
       {
         headers: {
@@ -63,7 +64,7 @@ const App_State = (props) => {
   // login
   const login = async (gmail, password) => {
     const api = await axios.post(
-      `${url}/login`,
+      `${baseurl}/api/login`,
       {
         gmail,
         password,
@@ -96,7 +97,7 @@ const App_State = (props) => {
     imgurl
   ) => {
     const api = await axios.post(
-      `${url}/add`,
+      `${baseurl}/api/add`,
       {
         title,
         ist,
@@ -124,7 +125,7 @@ setreload(!reload)
 
   // recipeById
   const getRecipeById = async (id) => {
-    const api = await axios.get(`${url}/${id}`, {
+    const api = await axios.get(`${baseurl}/api/${id}`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -137,7 +138,7 @@ setreload(!reload)
   // save Recipe By Id
   const savedRecipeById = async (id) => {
     const api = await axios.post(
-      `${url}/${id}`,
+      `${baseurl}/api/${id}`,
       {},
       {
         headers: {
@@ -155,7 +156,7 @@ setreload(!reload)
   // getSaved recipe
   const getSavedRecipeById = async () => {
     const api = await axios.get(
-      `${url}/saved`,
+      `${baseurl}/api/saved`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -170,7 +171,7 @@ setreload(!reload)
 
   // profile
   const profile = async () =>{
-    const api = await axios.get(`${url}/user`, {
+    const api = await axios.get(`${baseurl}/api/user`, {
       headers: {
         "Content-Type": "application/json",
         Auth:token
@@ -184,7 +185,7 @@ setreload(!reload)
 
   // get recipe by userId
   const recipeByUser = async (id) =>{
-    const api = await axios.get(`${url}/user/${id}`, {
+    const api = await axios.get(`${baseurl}/api/user/${id}`, {
       headers: {
         "Content-Type": "application/json",
         
